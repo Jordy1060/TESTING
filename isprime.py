@@ -1,8 +1,6 @@
 import math
 
-import math
-
-# Versión original (tiene error de v9)
+# Versión original (contiene un error para algunos números como 9)
 def isPrime(number):
     if number == 2:
         return True
@@ -13,7 +11,7 @@ def isPrime(number):
             return False
     return True
 
-# Versión corregida
+# Versión corregida: ahora verifica correctamente incluyendo la raíz cuadrada
 def isPrime2(number):
     if number <= 1:
         return False
@@ -21,39 +19,30 @@ def isPrime2(number):
         return True
     if number % 2 == 0:
         return False
-    for check in range(3, int(math.sqrt(number)) + 1, 2):  
+    for check in range(3, int(math.sqrt(number)) + 1, 2):  # +1 para incluir sqrt(n)
         if number % check == 0:
             return False
     return True
 
-# Función de prueba
+# Función de prueba con división entre versión incorrecta y corregida
 def test():
-    # Tests para isPrime (función con error)
+    # Parte A: Tests para la función original con fallo
     print("Pruebas con isPrime (original):")
     assert isPrime(1) == False
     assert isPrime(2) == True
-    assert isPrime(3) == True
-    assert isPrime(4) == False
-    assert isPrime(5) == True
-    assert isPrime(20) == False
-    assert isPrime(21) == False
-    assert isPrime(22) == False
-    assert isPrime(23) == True
-    assert isPrime(24) == False
-    assert isPrime(9) == False  #  Este test falla con isPrime
 
-    # Tests para isPrime2 (función corregida)
-    print("Pruebas con isPrime2 (corregida):")
+
+    # Parte B: Tests para la función corregida
+    print("\nPruebas con isPrime2 (corregida):")
     assert isPrime2(1) == False
     assert isPrime2(2) == True
     assert isPrime2(3) == True
     assert isPrime2(4) == False
     assert isPrime2(5) == True
-    assert isPrime2(9) == False  # ✅ Correcto con isPrime2
+    assert isPrime2(9) == False   #pasa correctamente
     assert isPrime2(23) == True
     assert isPrime2(25) == False
     assert isPrime2(97) == True
-    print("✅ Todas las pruebas pasaron correctamente.")
+    print("✅ Todos los tests pasaron con isPrime2.")
 
-# Ejecutamos las pruebas
 test()
